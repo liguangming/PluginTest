@@ -6,12 +6,12 @@ import android.widget.Toast;
 
 import com.example.plugincore.BasePluginActivy;
 
-public class MainActivity extends BasePluginActivy {
+public class MyActivity extends BasePluginActivy {
 
     @Override
     public  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_plugin_apk);
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

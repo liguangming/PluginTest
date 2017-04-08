@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -32,9 +33,9 @@ public class BasePluginActivy extends Activity implements PluginInterface {
 
     }
 
+
     @Override
     public void onCreat(Bundle savedInstanceState) {
-
     }
 
     @Override
@@ -62,15 +63,13 @@ public class BasePluginActivy extends Activity implements PluginInterface {
         return that.findViewById(id);
     }
 
-    @Override
-    public Intent getIntent() {
-        return that.getIntent();
-    }
+
 
     @Override
     public ClassLoader getClassLoader() {
         return that.getClassLoader();
     }
+
 
     @Override
     public Resources getResources() {
@@ -107,10 +106,6 @@ public class BasePluginActivy extends Activity implements PluginInterface {
         return that.getWindowManager();
     }
 
-    @Override
-    public Object getSystemService(String name){
-        return that.getSystemService(name);
-    }
 
     @Override
     public void finish() {
@@ -150,6 +145,11 @@ public class BasePluginActivy extends Activity implements PluginInterface {
 
     @Override
     protected void onNewIntent(Intent intent) {
+    }
+
+    @Override
+    public PackageManager getPackageManager() {
+        return that.getPackageManager();
     }
 
     @Override

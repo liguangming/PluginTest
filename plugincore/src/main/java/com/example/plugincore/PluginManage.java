@@ -63,7 +63,6 @@ public class PluginManage {
             //实例化resource
             Resources superResource = context.getResources();
             resources = new Resources(assetManager, superResource.getDisplayMetrics(), superResource.getConfiguration());
-
             PackageManager packageManager = context.getPackageManager();
             packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
         } catch (InstantiationException e) {
@@ -89,4 +88,5 @@ public class PluginManage {
     public PackageInfo getPackageInfo() {
         return packageInfo;
     }
+
 }

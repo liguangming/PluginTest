@@ -1,15 +1,15 @@
  package com.example.administrator.plugintest;
 
-import android.content.Intent;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
+ import android.content.Intent;
+ import android.os.Bundle;
+ import android.os.Environment;
+ import android.support.v7.app.AppCompatActivity;
+ import android.view.View;
 
-import com.example.plugincore.PluginManage;
-import com.example.plugincore.ProxyActivity;
+ import com.example.plugincore.PluginManage;
+ import com.example.plugincore.ProxyActivity;
 
-import java.io.File;
+ import java.io.File;
 
  public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +20,7 @@ import java.io.File;
         PluginManage.getInstance(this);
     }
     public void jump(View view){
+
         Intent intent=new Intent(this, ProxyActivity.class);
         //跳到插件
         intent.putExtra("className",PluginManage.getInstance().getPackageInfo().activities[0].name);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.MotionEvent;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -16,18 +17,17 @@ import java.lang.reflect.InvocationTargetException;
  * Created by Administrator on 2017/4/7.
  */
 
-public class ProxyActivity extends Activity {
+public class ProxyActivity extends BasePluginActivy {
     //替换插件apk里面的Activity的全类名
     String className;
     private PluginInterface pluginInterface;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent=getIntent();
         className=intent.getStringExtra("className");
         lauchActivity();
-
 
     }
     /**
@@ -40,8 +40,7 @@ public class ProxyActivity extends Activity {
             Constructor constructor=loadClass.getConstructor(new Class[]{});
             //反射得到activity实例
             Object instance=constructor.newInstance(new Object[]{});
-            //理由标准接口 将插件APK里的class强转成接口
-
+            //利用标准接口 将插件APK里的class强转成接口
             pluginInterface=(PluginInterface)instance;
             pluginInterface.attach(this);
             Bundle bundle=new Bundle();
@@ -62,29 +61,49 @@ public class ProxyActivity extends Activity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        pluginInterface.onStart();
+    protected void onSaveInstanceState(Bundle outState) {
+        pluginInterface.onSaveInatanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onStart() {
+        pluginInterface.onStart();
+        super.onStart();
+
+    }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         pluginInterface.onDestroy();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         pluginInterface.onStop();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pluginInterface.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        pluginInterface.onPause();
+    }
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         pluginInterface.onBackPressed();
     }
+
 
     /**
      * 必须重写getResource
